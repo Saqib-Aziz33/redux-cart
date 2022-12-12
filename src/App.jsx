@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { fetchData } from "./lib/utils";
-import Footer from "./components/Footer";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 // components
 import Header from "./components/Header";
-import Items from "./components/Items";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Item from "./pages/Item";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRequest, loadData } from "./features/dataSlice";
@@ -25,14 +27,19 @@ function App() {
 
   return (
     <>
-      <ToastContainer
-        position="bottom-right"
-        hideProgressBar={true}
-        theme="dark"
-      />
-      <Header />
-      <Items />
-      <Footer />
+      <BrowserRouter>
+        <Header />
+        <ToastContainer
+          position="bottom-right"
+          hideProgressBar={true}
+          theme="dark"
+        />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/:id" element={<Item />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </>
   );
 }
