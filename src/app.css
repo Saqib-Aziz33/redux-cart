@@ -23,7 +23,7 @@ body{
     background-color: transparent;
 }
 ::-webkit-scrollbar-thumb{
-    background-color: #e3e3e3;
+    background-color: #b1b0b0;
 }
 
 
@@ -38,4 +38,22 @@ body{
     height: 100%;
     width: 100%;
     object-fit: contain;
+}
+
+
+
+
+/* overrides */
+.btn-primary{
+    color: white;
+}
+
+.cart-drawer{
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(4px);
+    color: black;
+    overflow-y: scroll;
+}
+.cart-drawer::-webkit-scrollbar{
+    width: 2px;
 }
