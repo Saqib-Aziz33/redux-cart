@@ -5,6 +5,7 @@
 
 body{
     background-color: rgb(226 232 240);
+    user-select: none;
 }
 
 #root{
@@ -53,6 +54,15 @@ body{
     backdrop-filter: blur(4px);
     color: black;
     overflow-y: scroll;
+}
+.cart-img-wrapper{
+    height: 50px;
+    width: 40px;
+}
+.cart-img-wrapper img{
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
 }
 .cart-drawer::-webkit-scrollbar{
     width: 2px;

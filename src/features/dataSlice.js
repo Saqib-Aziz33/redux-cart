@@ -14,7 +14,6 @@ export const dataSlice = createSlice({
       state.status = "success";
     },
     fetchRequest: (state) => {
-      console.log("");
       state.loading = true;
       state.status = "pending";
       state.items = [];

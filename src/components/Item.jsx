@@ -1,8 +1,14 @@
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import { addItem } from "../features/cartSlice";
 
 function Item({ item }) {
   const dispatch = useDispatch();
+
+  function addToCart() {
+    dispatch(addItem(item));
+    toast.success("Item added");
+  }
 
   return (
     <div className="card bg-base-100 shadow-xl item">
@@ -14,10 +20,7 @@ function Item({ item }) {
         <p>{item.description.slice(0, 60)}...</p>
         <h4 className="text-primary font-bold card text-2xl">${item.price}</h4>
         <div className="card-actions">
-          <button
-            onClick={() => dispatch(addItem(item))}
-            className="btn btn-primary"
-          >
+          <button onClick={addToCart} className="btn btn-primary">
             Add to cart
           </button>
         </div>
@@ -25,4 +28,5 @@ function Item({ item }) {
     </div>
   );
 }
+
 export default Item;
