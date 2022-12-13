@@ -1,4 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+export const fetchData = createAsyncThunk("data/fetchData", async (url) => {
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+});
 
 export const dataSlice = createSlice({
   name: "data",
@@ -6,6 +16,7 @@ export const dataSlice = createSlice({
     items: [],
     loading: false,
     status: "idle", // idel, success, error, pending
+    error: null,
   },
   reducers: {
     loadData: (state, action) => {
@@ -18,6 +29,26 @@ export const dataSlice = createSlice({
       state.status = "pending";
       state.items = [];
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchData.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+      state.status = "pending";
+    });
+
+    builder.addCase(fetchData.fulfilled, (state, action) => {
+      state.loading = false;
+      state.status = "success";
+      state.items = action.payload;
+    });
+
+    builder.addCase(fetchData.rejected, (state, action) => {
+      state.loading = false;
+      state.status = "error";
+      state.items = [];
+      state.error = action.payload;
+    });
   },
 });
 

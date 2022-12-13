@@ -8,6 +8,7 @@ function Item() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { status, items } = useSelector((state) => state.data);
+  const { items: cart } = useSelector((state) => state.cart);
   const [item, setItem] = useState(null);
 
   useEffect(() => {
@@ -40,7 +41,11 @@ function Item() {
                 ${item.price}
               </h4>
               <div className="card-actions mt-8">
-                <button onClick={addToCart} className="btn btn-primary">
+                <button
+                  onClick={addToCart}
+                  className="btn btn-primary"
+                  disabled={cart.includes(item)}
+                >
                   Add to cart
                 </button>
               </div>

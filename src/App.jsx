@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { fetchData } from "./lib/utils";
+// import { fetchData } from "./lib/utils";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 // components
 import Header from "./components/Header";
@@ -8,7 +8,7 @@ import Home from "./pages/Home";
 import Item from "./pages/Item";
 // redux
 import { useDispatch, useSelector } from "react-redux";
-import { fetchRequest, loadData } from "./features/dataSlice";
+import { fetchRequest, loadData, fetchData } from "./features/dataSlice";
 // others
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,8 +20,7 @@ function App() {
 
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchRequest());
-      fetchData().then((data) => dispatch(loadData(data)));
+      dispatch(fetchData("https://fakestoreapi.com/products/"));
     }
   }, [status, dispatch]);
 

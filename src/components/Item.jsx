@@ -1,10 +1,11 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addItem } from "../features/cartSlice";
 
 function Item({ item }) {
   const dispatch = useDispatch();
+  const { items } = useSelector((state) => state.cart);
 
   function addToCart() {
     dispatch(addItem(item));
@@ -26,7 +27,11 @@ function Item({ item }) {
         </p>
         <h4 className="text-primary font-bold card text-2xl">${item.price}</h4>
         <div className="card-actions">
-          <button onClick={addToCart} className="btn btn-primary">
+          <button
+            onClick={addToCart}
+            className="btn btn-primary"
+            disabled={items.includes(item)}
+          >
             Add to cart
           </button>
         </div>
